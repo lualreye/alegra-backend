@@ -12,9 +12,9 @@ function createApp() {
   const server = http.createServer(app);
   const io = new Server(server);
 
-  const whitelist = ["http://localhost:5173"];
+  // const whitelist = ["http://localhost:5173"];
 
-  app.use(cors({ origin: whitelist }));
+  app.use(cors({ origin: "*" }));
 
   app.use(express.json());
 
