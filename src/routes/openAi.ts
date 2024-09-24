@@ -1,12 +1,9 @@
-import express from 'express'
+import express from "express";
 
-import {
-  generateImage,
-} from '../controllers/openAi.controller';
+import { getNegotiatorPitch } from "../controllers/negotiator.controller";
 
-const router = express.Router()
+const router = express.Router();
 
-router.post('/generate-image', generateImage);
-
+router.post("/get-sales-pitch", getNegotiatorPitch);
 
 export default router;
