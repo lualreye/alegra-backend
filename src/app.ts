@@ -12,6 +12,7 @@ function createApp() {
   const server = http.createServer(app);
   const io = new Server(server);
 
+  // Lista de dominios permitidos
   const whitelist = ["https://alegra-frontend-challenge.vercel.app"];
 
   const corsOptions = {
@@ -26,6 +27,9 @@ function createApp() {
         callback(new Error("Not allowed by CORS"));
       }
     },
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Asegura que acepte los métodos permitidos
+    credentials: true, // Permite que se envíen cookies si es necesario
+    optionsSuccessStatus: 204, // Respuesta exitosa para preflight requests
   };
 
   // Usar CORS con las opciones configuradas
