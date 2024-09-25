@@ -12,9 +12,24 @@ function createApp() {
   const server = http.createServer(app);
   const io = new Server(server);
 
-  // const whitelist = ["http://localhost:5173"];
+  const whitelist = ["https://alegra-frontend-challenge.vercel.app"];
 
-  app.use(cors({ origin: "*" }));
+  const corsOptions = {
+    origin: (
+      origin: string | undefined,
+      callback: (err: Error | null, allowed?: boolean) => void
+    ) => {
+      // Si el origen está en la lista permitida o no tiene origen (para clientes como Postman)
+      if (whitelist.indexOf(origin || "") !== -1 || !origin) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  };
+
+  // Usar CORS con las opciones configuradas
+  app.use(cors(corsOptions));
 
   app.use(express.json());
 
